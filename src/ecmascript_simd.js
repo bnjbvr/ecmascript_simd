@@ -211,6 +211,7 @@ SIMD.float32x4 = function(x, y, z, w) {
   * in all lanes.
   * @param {double} value used for all lanes.
   * @constructor
+  * @asmjs
   */
 SIMD.float32x4.splat = function(s) {
   return SIMD.float32x4(s, s, s, s);
@@ -228,6 +229,7 @@ SIMD.float32x4.fromFloat64x2 = function(t) {
 /**
   * @param {int32x4} t An instance of int32x4.
   * @return {float32x4} A float to integer conversion copy of t.
+  * @asmjs
   */
 SIMD.float32x4.fromInt32x4 = function(t) {
   checkInt32x4(t);
@@ -246,6 +248,7 @@ SIMD.float32x4.fromFloat64x2Bits = function(t) {
 /**
  * @param {int32x4} t An instance of int32x4.
  * @return {float32x4} a bit-wise copy of t as a float32x4.
+ * @asmjs
  */
 SIMD.float32x4.fromInt32x4Bits = function(t) {
   _PRIVATE.saveInt32x4(t);
@@ -400,6 +403,7 @@ SIMD.int32x4.bool = function(x, y, z, w) {
   * in all lanes.
   * @param {integer} value used for all lanes.
   * @constructor
+  * @asmjs
   */
 SIMD.int32x4.splat = function(s) {
   return SIMD.int32x4(s, s, s, s);
@@ -408,6 +412,7 @@ SIMD.int32x4.splat = function(s) {
 /**
   * @param {float32x4} t An instance of float32x4.
   * @return {int32x4} with a integer to float conversion of t.
+  * @asmjs
   */
 SIMD.int32x4.fromFloat32x4 = function(t) {
   checkFloat32x4(t);
@@ -417,6 +422,7 @@ SIMD.int32x4.fromFloat32x4 = function(t) {
 /**
   * @param {float64x2} t An instance of float64x2.
   * @return {int32x4}  An int32x4 with .x and .y from t
+  * @asmjs
   */
 SIMD.int32x4.fromFloat64x2 = function(t) {
   checkFloat64x2(t);
@@ -704,6 +710,7 @@ SIMD.int8x16.fromInt16x8Bits = function(t) {
   * @param {float32x4} t An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with absolute values of
   * t.
+  * @asmjs
   */
 SIMD.float32x4.abs = function(t) {
   checkFloat32x4(t);
@@ -715,6 +722,7 @@ SIMD.float32x4.abs = function(t) {
   * @param {float32x4} t An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with negated values of
   * t.
+  * @asmjs
   */
 SIMD.float32x4.neg = function(t) {
   checkFloat32x4(t);
@@ -725,6 +733,7 @@ SIMD.float32x4.neg = function(t) {
   * @param {float32x4} a An instance of float32x4.
   * @param {float32x4} b An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with a + b.
+  * @asmjs
   */
 SIMD.float32x4.add = function(a, b) {
   checkFloat32x4(a);
@@ -736,6 +745,7 @@ SIMD.float32x4.add = function(a, b) {
   * @param {float32x4} a An instance of float32x4.
   * @param {float32x4} b An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with a - b.
+  * @asmjs
   */
 SIMD.float32x4.sub = function(a, b) {
   checkFloat32x4(a);
@@ -747,6 +757,7 @@ SIMD.float32x4.sub = function(a, b) {
   * @param {float32x4} a An instance of float32x4.
   * @param {float32x4} b An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with a * b.
+  * @asmjs
   */
 SIMD.float32x4.mul = function(a, b) {
   checkFloat32x4(a);
@@ -758,6 +769,7 @@ SIMD.float32x4.mul = function(a, b) {
   * @param {float32x4} a An instance of float32x4.
   * @param {float32x4} b An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with a / b.
+  * @asmjs
   */
 SIMD.float32x4.div = function(a, b) {
   checkFloat32x4(a);
@@ -792,6 +804,7 @@ SIMD.float32x4.clamp = function(t, lowerLimit, upperLimit) {
   * @param {float32x4} other An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with the minimum value of
   * t and other.
+  * @asmjs
   */
 SIMD.float32x4.min = function(t, other) {
   checkFloat32x4(t);
@@ -808,6 +821,7 @@ SIMD.float32x4.min = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with the maximum value of
   * t and other.
+  * @asmjs
   */
 SIMD.float32x4.max = function(t, other) {
   checkFloat32x4(t);
@@ -824,6 +838,7 @@ SIMD.float32x4.max = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with the minimum value of
   * t and other, preferring numbers over NaNs.
+  * @asmjs
   */
 SIMD.float32x4.minNum = function(t, other) {
   checkFloat32x4(t);
@@ -840,6 +855,7 @@ SIMD.float32x4.minNum = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with the maximum value of
   * t and other, preferring numbers over NaNs.
+  * @asmjs
   */
 SIMD.float32x4.maxNum = function(t, other) {
   checkFloat32x4(t);
@@ -855,6 +871,7 @@ SIMD.float32x4.maxNum = function(t, other) {
   * @param {float32x4} t An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with reciprocal value of
   * t.
+  * @asmjs
   */
 SIMD.float32x4.reciprocal = function(t) {
   checkFloat32x4(t);
@@ -865,6 +882,7 @@ SIMD.float32x4.reciprocal = function(t) {
   * @param {float32x4} t An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with square root of the
   * reciprocal value of t.
+  * @asmjs
   */
 SIMD.float32x4.reciprocalSqrt = function(t) {
   checkFloat32x4(t);
@@ -876,6 +894,7 @@ SIMD.float32x4.reciprocalSqrt = function(t) {
   * @param {float32x4} t An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with square root of
   * values of t.
+  * @asmjs
   */
 SIMD.float32x4.sqrt = function(t) {
   checkFloat32x4(t);
@@ -890,6 +909,7 @@ SIMD.float32x4.sqrt = function(t) {
   * @param {integer} z - Index in t for lane z
   * @param {integer} w - Index in t for lane w
   * @return {float32x4} New instance of float32x4 with lanes swizzled.
+  * @asmjs
   */
 SIMD.float32x4.swizzle = function(t, x, y, z, w) {
   checkFloat32x4(t);
@@ -909,6 +929,7 @@ SIMD.float32x4.swizzle = function(t, x, y, z, w) {
   * @param {integer} z - Index in concatenation of t1 and t2 for lane z
   * @param {integer} w - Index in concatenation of t1 and t2 for lane w
   * @return {float32x4} New instance of float32x4 with lanes shuffled.
+  * @asmjs
   */
 SIMD.float32x4.shuffle = function(t1, t2, x, y, z, w) {
   checkFloat32x4(t1);
@@ -930,6 +951,7 @@ SIMD.float32x4.shuffle = function(t1, t2, x, y, z, w) {
   * @param {double} value used for x lane.
   * @return {float32x4} New instance of float32x4 with the values in t and
   * x replaced with {x}.
+  * @asmjs
   */
 SIMD.float32x4.withX = function(t, x) {
   checkFloat32x4(t);
@@ -941,6 +963,7 @@ SIMD.float32x4.withX = function(t, x) {
   * @param {double} value used for y lane.
   * @return {float32x4} New instance of float32x4 with the values in t and
   * y replaced with {y}.
+  * @asmjs
   */
 SIMD.float32x4.withY = function(t, y) {
   checkFloat32x4(t);
@@ -952,6 +975,7 @@ SIMD.float32x4.withY = function(t, y) {
   * @param {double} value used for z lane.
   * @return {float32x4} New instance of float32x4 with the values in t and
   * z replaced with {z}.
+  * @asmjs
   */
 SIMD.float32x4.withZ = function(t, z) {
   checkFloat32x4(t);
@@ -963,6 +987,7 @@ SIMD.float32x4.withZ = function(t, z) {
   * @param {double} value used for w lane.
   * @return {float32x4} New instance of float32x4 with the values in t and
   * w replaced with {w}.
+  * @asmjs
   */
 SIMD.float32x4.withW = function(t, w) {
   checkFloat32x4(t);
@@ -974,6 +999,7 @@ SIMD.float32x4.withW = function(t, w) {
   * @param {float32x4} other An instance of float32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t < other.
+  * @asmjs
   */
 SIMD.float32x4.lessThan = function(t, other) {
   checkFloat32x4(t);
@@ -990,6 +1016,7 @@ SIMD.float32x4.lessThan = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t <= other.
+  * @asmjs
   */
 SIMD.float32x4.lessThanOrEqual = function(t, other) {
   checkFloat32x4(t);
@@ -1006,6 +1033,7 @@ SIMD.float32x4.lessThanOrEqual = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t == other.
+  * @asmjs
   */
 SIMD.float32x4.equal = function(t, other) {
   checkFloat32x4(t);
@@ -1022,6 +1050,7 @@ SIMD.float32x4.equal = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t != other.
+  * @asmjs
   */
 SIMD.float32x4.notEqual = function(t, other) {
   checkFloat32x4(t);
@@ -1038,6 +1067,7 @@ SIMD.float32x4.notEqual = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t >= other.
+  * @asmjs
   */
 SIMD.float32x4.greaterThanOrEqual = function(t, other) {
   checkFloat32x4(t);
@@ -1054,6 +1084,7 @@ SIMD.float32x4.greaterThanOrEqual = function(t, other) {
   * @param {float32x4} other An instance of float32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t > other.
+  * @asmjs
   */
 SIMD.float32x4.greaterThan = function(t, other) {
   checkFloat32x4(t);
@@ -1073,6 +1104,7 @@ SIMD.float32x4.greaterThan = function(t, other) {
   * selector lane is false
   * @return {float32x4} Mix of lanes from trueValue or falseValue as
   * indicated
+  * @asmjs
   */
 SIMD.float32x4.select = function(t, trueValue, falseValue) {
   checkInt32x4(t);
@@ -1108,6 +1140,7 @@ SIMD.float32x4.bitselect = function(t, trueValue, falseValue) {
   * @param {float32x4} a An instance of float32x4.
   * @param {float32x4} b An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with values of a & b.
+  * @asmjs
   */
 SIMD.float32x4.and = function(a, b) {
   checkFloat32x4(a);
@@ -1121,6 +1154,7 @@ SIMD.float32x4.and = function(a, b) {
   * @param {float32x4} a An instance of float32x4.
   * @param {float32x4} b An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with values of a | b.
+  * @asmjs
   */
 SIMD.float32x4.or = function(a, b) {
   checkFloat32x4(a);
@@ -1134,6 +1168,7 @@ SIMD.float32x4.or = function(a, b) {
   * @param {float32x4} a An instance of float32x4.
   * @param {float32x4} b An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with values of a ^ b.
+  * @asmjs
   */
 SIMD.float32x4.xor = function(a, b) {
   checkFloat32x4(a);
@@ -1146,6 +1181,7 @@ SIMD.float32x4.xor = function(a, b) {
 /**
   * @param {float32x4} a An instance of float32x4.
   * @return {float32x4} New instance of float32x4 with values of ~a.
+  * @asmjs
   */
 SIMD.float32x4.not = function(a) {
   checkFloat32x4(a);
@@ -1157,6 +1193,7 @@ SIMD.float32x4.not = function(a) {
   * @param {Typed array} tarray An instance of a typed array.
   * @param {Number} index An instance of Number.
   * @return {float32x4} New instance of float32x4.
+  * @asmjs
   */
 SIMD.float32x4.load = function(tarray, index) {
   if (!isTypedArray(tarray))
@@ -1254,6 +1291,7 @@ SIMD.float32x4.loadXYZ = function(tarray, index) {
   * @param {Number} index An instance of Number.
   * @param {float32x4} value An instance of float32x4.
   * @return {void}
+  * @asmjs
   */
 SIMD.float32x4.store = function(tarray, index, value) {
   if (!isTypedArray(tarray))
@@ -1813,6 +1851,7 @@ SIMD.float64x2.storeX = function(tarray, index, value) {
   * @param {int32x4} a An instance of int32x4.
   * @param {int32x4} b An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of a & b.
+  * @asmjs
   */
 SIMD.int32x4.and = function(a, b) {
   checkInt32x4(a);
@@ -1824,6 +1863,7 @@ SIMD.int32x4.and = function(a, b) {
   * @param {int32x4} a An instance of int32x4.
   * @param {int32x4} b An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of a | b.
+  * @asmjs
   */
 SIMD.int32x4.or = function(a, b) {
   checkInt32x4(a);
@@ -1835,6 +1875,7 @@ SIMD.int32x4.or = function(a, b) {
   * @param {int32x4} a An instance of int32x4.
   * @param {int32x4} b An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of a ^ b.
+  * @asmjs
   */
 SIMD.int32x4.xor = function(a, b) {
   checkInt32x4(a);
@@ -1845,6 +1886,7 @@ SIMD.int32x4.xor = function(a, b) {
 /**
   * @param {int32x4} t An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of ~t
+  * @asmjs
   */
 SIMD.int32x4.not = function(t) {
   checkInt32x4(t);
@@ -1854,6 +1896,7 @@ SIMD.int32x4.not = function(t) {
 /**
   * @param {int32x4} t An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of -t
+  * @asmjs
   */
 SIMD.int32x4.neg = function(t) {
   checkInt32x4(t);
@@ -1864,6 +1907,7 @@ SIMD.int32x4.neg = function(t) {
   * @param {int32x4} a An instance of int32x4.
   * @param {int32x4} b An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of a + b.
+  * @asmjs
   */
 SIMD.int32x4.add = function(a, b) {
   checkInt32x4(a);
@@ -1875,6 +1919,7 @@ SIMD.int32x4.add = function(a, b) {
   * @param {int32x4} a An instance of int32x4.
   * @param {int32x4} b An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of a - b.
+  * @asmjs
   */
 SIMD.int32x4.sub = function(a, b) {
   checkInt32x4(a);
@@ -1886,6 +1931,7 @@ SIMD.int32x4.sub = function(a, b) {
   * @param {int32x4} a An instance of int32x4.
   * @param {int32x4} b An instance of int32x4.
   * @return {int32x4} New instance of int32x4 with values of a * b.
+  * @asmjs
   */
 SIMD.int32x4.mul = function(a, b) {
   checkInt32x4(a);
@@ -1901,6 +1947,7 @@ SIMD.int32x4.mul = function(a, b) {
   * @param {integer} z - Index in t for lane z
   * @param {integer} w - Index in t for lane w
   * @return {int32x4} New instance of float32x4 with lanes swizzled.
+  * @asmjs
   */
 SIMD.int32x4.swizzle = function(t, x, y, z, w) {
   checkInt32x4(t);
@@ -1920,6 +1967,7 @@ SIMD.int32x4.swizzle = function(t, x, y, z, w) {
   * @param {integer} z - Index in concatenation of t1 and t2 for lane z
   * @param {integer} w - Index in concatenation of t1 and t2 for lane w
   * @return {int32x4} New instance of float32x4 with lanes shuffled.
+  * @asmjs
   */
 SIMD.int32x4.shuffle = function(t1, t2, x, y, z, w) {
   checkInt32x4(t1);
@@ -1944,6 +1992,7 @@ SIMD.int32x4.shuffle = function(t1, t2, x, y, z, w) {
   * selector lane is false
   * @return {int32x4} Mix of lanes from trueValue or falseValue as
   * indicated
+  * @asmjs
   */
 SIMD.int32x4.select = function(t, trueValue, falseValue) {
   checkInt32x4(t);
@@ -1978,6 +2027,7 @@ SIMD.int32x4.bitselect = function(t, trueValue, falseValue) {
   * @param {integer} 32-bit value used for x lane.
   * @return {int32x4} New instance of int32x4 with the values in t and
   * x lane replaced with {x}.
+  * @asmjs
   */
 SIMD.int32x4.withX = function(t, x) {
   checkInt32x4(t);
@@ -1989,6 +2039,7 @@ SIMD.int32x4.withX = function(t, x) {
   * @param {integer} 32-bit value used for y lane.
   * @return {int32x4} New instance of int32x4 with the values in t and
   * y lane replaced with {y}.
+  * @asmjs
   */
 SIMD.int32x4.withY = function(t, y) {
   checkInt32x4(t);
@@ -2000,6 +2051,7 @@ SIMD.int32x4.withY = function(t, y) {
   * @param {integer} 32-bit value used for z lane.
   * @return {int32x4} New instance of int32x4 with the values in t and
   * z lane replaced with {z}.
+  * @asmjs
   */
 SIMD.int32x4.withZ = function(t, z) {
   checkInt32x4(t);
@@ -2011,6 +2063,7 @@ SIMD.int32x4.withZ = function(t, z) {
   * @param {integer} 32-bit value used for w lane.
   * @return {int32x4} New instance of int32x4 with the values in t and
   * w lane replaced with {w}.
+  * @asmjs
   */
 SIMD.int32x4.withW = function(t, w) {
   checkInt32x4(t);
@@ -2022,6 +2075,7 @@ SIMD.int32x4.withW = function(t, w) {
   * @param {int32x4} other An instance of int32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t == other.
+  * @asmjs
   */
 SIMD.int32x4.equal = function(t, other) {
   checkInt32x4(t);
@@ -2038,6 +2092,7 @@ SIMD.int32x4.equal = function(t, other) {
   * @param {int32x4} other An instance of int32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t > other.
+  * @asmjs
   */
 SIMD.int32x4.greaterThan = function(t, other) {
   checkInt32x4(t);
@@ -2054,6 +2109,7 @@ SIMD.int32x4.greaterThan = function(t, other) {
   * @param {int32x4} other An instance of int32x4.
   * @return {int32x4} true or false in each lane depending on
   * the result of t < other.
+  * @asmjs
   */
 SIMD.int32x4.lessThan = function(t, other) {
   checkInt32x4(t);
@@ -2069,6 +2125,7 @@ SIMD.int32x4.lessThan = function(t, other) {
   * @param {int32x4} a An instance of int32x4.
   * @param {integer} bits Bit count to shift by.
   * @return {int32x4} lanes in a shifted by bits.
+  * @asmjs
   */
 SIMD.int32x4.shiftLeftByScalar = function(a, bits) {
   checkInt32x4(a);
@@ -2083,6 +2140,7 @@ SIMD.int32x4.shiftLeftByScalar = function(a, bits) {
   * @param {int32x4} a An instance of int32x4.
   * @param {integer} bits Bit count to shift by.
   * @return {int32x4} lanes in a shifted by bits.
+  * @asmjs
   */
 SIMD.int32x4.shiftRightLogicalByScalar = function(a, bits) {
   checkInt32x4(a);
@@ -2097,6 +2155,7 @@ SIMD.int32x4.shiftRightLogicalByScalar = function(a, bits) {
   * @param {int32x4} a An instance of int32x4.
   * @param {integer} bits Bit count to shift by.
   * @return {int32x4} lanes in a shifted by bits.
+  * @asmjs
   */
 SIMD.int32x4.shiftRightArithmeticByScalar = function(a, bits) {
   checkInt32x4(a);
@@ -2111,6 +2170,7 @@ SIMD.int32x4.shiftRightArithmeticByScalar = function(a, bits) {
   * @param {Typed array} tarray An instance of a typed array.
   * @param {Number} index An instance of Number.
   * @return {int32x4} New instance of int32x4.
+  * @asmjs
   */
 SIMD.int32x4.load = function(tarray, index) {
   if (!isTypedArray(tarray))
@@ -2208,6 +2268,7 @@ SIMD.int32x4.loadXYZ = function(tarray, index) {
   * @param {Number} index An instance of Number.
   * @param {int32x4} value An instance of int32x4.
   * @return {void}
+  * @asmjs
   */
 SIMD.int32x4.store = function(tarray, index, value) {
   if (!isTypedArray(tarray))
