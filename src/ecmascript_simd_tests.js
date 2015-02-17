@@ -31,31 +31,31 @@ test('float32x4 constructor', function() {
   notEqual(undefined, SIMD.float32x4(1.0, 2.0, 3.0, 4.0));  // New object.
 });
 
-test('coercive constructors', function() {
+test('simd128 types check', function() {
   var x = SIMD.float32x4(1.0, 2.0, 3.0, 4.0);
-  equal(SIMD.float32x4(x), x);
-  throws(function() {SIMD.float32x4(1)});
-  throws(function() {SIMD.float32x4('hi')});
+  equal(SIMD.float32x4.check(x), x);
+  throws(function() {SIMD.float32x4.check(1)});
+  throws(function() {SIMD.float32x4.check('hi')});
 
   var y = SIMD.int32x4(1, 2, 3, 4);
-  equal(SIMD.int32x4(y), y);
-  throws(function() {SIMD.int32x4(1)});
-  throws(function() {SIMD.int32x4('hi')});
+  equal(SIMD.int32x4.check(y), y);
+  throws(function() {SIMD.int32x4.check(1)});
+  throws(function() {SIMD.int32x4.check('hi')});
 
   var z = SIMD.float64x2(1.0, 2.0);
-  equal(SIMD.float64x2(z), z);
-  throws(function() {SIMD.float64x2(1)});
-  throws(function() {SIMD.float64x2('hi')});
+  equal(SIMD.float64x2.check(z), z);
+  throws(function() {SIMD.float64x2.check(1)});
+  throws(function() {SIMD.float64x2.check('hi')});
 
   var u = SIMD.int16x8(1, 2, 3, 4, 5, 6, 7, 8);
-  equal(SIMD.int16x8(u), u);
-  throws(function() {SIMD.int16x8(1)});
-  throws(function() {SIMD.int16x8('hi')});
+  equal(SIMD.int16x8.check(u), u);
+  throws(function() {SIMD.int16x8.check(1)});
+  throws(function() {SIMD.int16x8.check('hi')});
 
   var v = SIMD.int8x16(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-  equal(SIMD.int8x16(v), v);
-  throws(function() {SIMD.int8x16(1)});
-  throws(function() {SIMD.int8x16('hi')});
+  equal(SIMD.int8x16.check(v), v);
+  throws(function() {SIMD.int8x16.check(1)});
+  throws(function() {SIMD.int8x16.check('hi')});
 });
 
 test('float32x4 fromFloat64x2 constructor', function() {
@@ -1250,9 +1250,9 @@ test('float64x2 scalar getters', function() {
 });
 
 test('float64x2 signMask getter', function() {
-  var a = SIMD.float32x4(1.0, 2.0);
+  var a = SIMD.float64x2(1.0, 2.0);
   equal(0x0, a.signMask);
-  var b = SIMD.float32x4(-1.0, 2.0);
+  var b = SIMD.float64x2(-1.0, 2.0);
   equal(0x1, b.signMask);
   var c = SIMD.float64x2(1.0, -2.0);
   equal(0x2, c.signMask);
@@ -1983,7 +1983,7 @@ test('int32x4 fromFloat64x2Bits constructor', function() {
 
 test('int32x4 shuffle', function() {
   var a    = SIMD.int32x4(1, 2, 3, 4);
-  var b    = SIMD.int32x4(5, 6, 7, 8);
+  var b    = SIMD.int32x4(5, 6, 7, 2147483647);
   var xyxy = SIMD.int32x4.shuffle(a, b, 0, 1, 4, 5);
   var zwzw = SIMD.int32x4.shuffle(a, b, 2, 3, 6, 7);
   var xxxx = SIMD.int32x4.shuffle(a, b, 0, 0, 4, 4);
@@ -1994,7 +1994,7 @@ test('int32x4 shuffle', function() {
   equal(3, zwzw.x);
   equal(4, zwzw.y);
   equal(7, zwzw.z);
-  equal(8, zwzw.w);
+  equal(2147483647, zwzw.w);
   equal(1, xxxx.x);
   equal(1, xxxx.y);
   equal(5, xxxx.z);
@@ -2010,7 +2010,7 @@ test('int32x4 shuffle', function() {
   equal(3, d.x);
   equal(7, d.y);
   equal(4, d.z);
-  equal(8, d.w);
+  equal(2147483647, d.w);
   equal(1, e.x);
   equal(5, e.y);
   equal(1, e.z);
@@ -2213,15 +2213,33 @@ test('int32x4 comparisons', function() {
   equal(0x0, cmp.z);
   equal(-1, cmp.w);
 
+  cmp = SIMD.int32x4.lessThanOrEqual(m, n);
+  equal(0x0, cmp.x);
+  equal(-1, cmp.y);
+  equal(0x0, cmp.z);
+  equal(-1, cmp.w);
+
   cmp = SIMD.int32x4.equal(m, n);
   equal(0x0, cmp.x);
   equal(-1, cmp.y);
   equal(0x0, cmp.z);
   equal(0x0, cmp.w);
 
+  cmp = SIMD.int32x4.notEqual(m, n);
+  equal(-1, cmp.x);
+  equal(0x0, cmp.y);
+  equal(-1, cmp.z);
+  equal(-1, cmp.w);
+
   cmp = SIMD.int32x4.greaterThan(m, n);
   equal(-1, cmp.x);
   equal(0x0, cmp.y);
+  equal(-1, cmp.z);
+  equal(0x0, cmp.w);
+
+  cmp = SIMD.int32x4.greaterThanOrEqual(m, n);
+  equal(-1, cmp.x);
+  equal(-1, cmp.y);
   equal(-1, cmp.z);
   equal(0x0, cmp.w);
 });
@@ -3032,6 +3050,16 @@ test('int16x8 comparisons', function() {
   equal(-1, cmp.s6);
   equal(0x0, cmp.s7);
 
+  cmp = SIMD.int16x8.lessThanOrEqual(m, n);
+  equal(0x0, cmp.s0);
+  equal(-1, cmp.s1);
+  equal(0x0, cmp.s2);
+  equal(-1, cmp.s3);
+  equal(-1, cmp.s4);
+  equal(-1, cmp.s5);
+  equal(-1, cmp.s6);
+  equal(0x0, cmp.s7);
+
   cmp = SIMD.int16x8.equal(m, n);
   equal(0x0, cmp.s0);
   equal(-1, cmp.s1);
@@ -3042,6 +3070,16 @@ test('int16x8 comparisons', function() {
   equal(0x0, cmp.s6);
   equal(0x0, cmp.s7);
 
+  cmp = SIMD.int16x8.notEqual(m, n);
+  equal(-1, cmp.s0);
+  equal(0x0, cmp.s1);
+  equal(-1, cmp.s2);
+  equal(-1, cmp.s3);
+  equal(-1, cmp.s4);
+  equal(0x0, cmp.s5);
+  equal(-1, cmp.s6);
+  equal(-1, cmp.s7);
+
   cmp = SIMD.int16x8.greaterThan(m, n);
   equal(-1, cmp.s0);
   equal(0, cmp.s1);
@@ -3049,6 +3087,16 @@ test('int16x8 comparisons', function() {
   equal(0, cmp.s3);
   equal(0, cmp.s4);
   equal(0, cmp.s5);
+  equal(0, cmp.s6);
+  equal(-1, cmp.s7);
+
+  cmp = SIMD.int16x8.greaterThanOrEqual(m, n);
+  equal(-1, cmp.s0);
+  equal(-1, cmp.s1);
+  equal(-1, cmp.s2);
+  equal(0, cmp.s3);
+  equal(0, cmp.s4);
+  equal(-1, cmp.s5);
   equal(0, cmp.s6);
   equal(-1, cmp.s7);
 });
@@ -3192,6 +3240,21 @@ test('int16x8 select', function() {
   equal(14, s.s5);
   equal(15, s.s6);
   equal(16, s.s7);
+});
+
+test('int16x8 bitselect', function() {
+  var m = SIMD.int16x8(0xaaaaaaaa, 0xbbbbbbbb, 0xcccccccc, 0xdddddddd, 0xeeeeeeee, 0xffffffff, 0x00000000, 0x55555555);
+  var t = SIMD.int16x8(1, 2, 3, 4, 5, 6, 7, 8);
+  var f = SIMD.int16x8(9, 10, 11, 12, 13, 14, 15, 16);
+  var s = SIMD.int16x8.bitselect(m, t, f);
+  equal(1, s.s0);
+  equal(2, s.s1);
+  equal(3, s.s2);
+  equal(4, s.s3);
+  equal(5, s.s4);
+  equal(6, s.s5);
+  equal(15, s.s6);
+  equal(0, s.s7);
 });
 
 test('int8x16 and', function() {
@@ -3447,6 +3510,24 @@ test('int8x16 comparisons', function() {
   equal(-1, cmp.s14);
   equal(0x0, cmp.s15);
 
+  cmp = SIMD.int8x16.lessThanOrEqual(m, n);
+  equal(-1, cmp.s0);
+  equal(-1, cmp.s1);
+  equal(0x0, cmp.s2);
+  equal(-1, cmp.s3);
+  equal(0x0, cmp.s4);
+  equal(-1, cmp.s5);
+  equal(-1, cmp.s6);
+  equal(0x0, cmp.s7);
+  equal(0x0, cmp.s8);
+  equal(-1, cmp.s9);
+  equal(0x0, cmp.s10);
+  equal(-1, cmp.s11);
+  equal(-1, cmp.s12);
+  equal(0x0, cmp.s13);
+  equal(-1, cmp.s14);
+  equal(0x0, cmp.s15);
+
   cmp = SIMD.int8x16.equal(m, n);
   equal(0x0, cmp.s0);
   equal(-1, cmp.s1);
@@ -3465,6 +3546,24 @@ test('int8x16 comparisons', function() {
   equal(0x0, cmp.s14);
   equal(0x0, cmp.s15);
 
+  cmp = SIMD.int8x16.notEqual(m, n);
+  equal(-1, cmp.s0);
+  equal(0x0, cmp.s1);
+  equal(-1, cmp.s2);
+  equal(-1, cmp.s3);
+  equal(-1, cmp.s4);
+  equal(0x0, cmp.s5);
+  equal(-1, cmp.s6);
+  equal(-1, cmp.s7);
+  equal(-1, cmp.s8);
+  equal(-1, cmp.s9);
+  equal(-1, cmp.s10);
+  equal(-1, cmp.s11);
+  equal(-1, cmp.s12);
+  equal(-1, cmp.s13);
+  equal(-1, cmp.s14);
+  equal(-1, cmp.s15);
+
   cmp = SIMD.int8x16.greaterThan(m, n);
   equal(0x0, cmp.s0);
   equal(0x0, cmp.s1);
@@ -3472,6 +3571,24 @@ test('int8x16 comparisons', function() {
   equal(0x0, cmp.s3);
   equal(-1, cmp.s4);
   equal(0x0, cmp.s5);
+  equal(0x0, cmp.s6);
+  equal(-1, cmp.s7);
+  equal(-1, cmp.s8);
+  equal(0x0, cmp.s9);
+  equal(-1, cmp.s10);
+  equal(0x0, cmp.s11);
+  equal(0x0, cmp.s12);
+  equal(-1, cmp.s13);
+  equal(0x0, cmp.s14);
+  equal(-1, cmp.s15);
+
+  cmp = SIMD.int8x16.greaterThanOrEqual(m, n);
+  equal(0x0, cmp.s0);
+  equal(-1, cmp.s1);
+  equal(-1, cmp.s2);
+  equal(0x0, cmp.s3);
+  equal(-1, cmp.s4);
+  equal(-1, cmp.s5);
   equal(0x0, cmp.s6);
   equal(-1, cmp.s7);
   equal(-1, cmp.s8);
@@ -3727,6 +3844,30 @@ test('int8x16 select', function() {
   equal(30, s.s13);
   equal(31, s.s14);
   equal(32, s.s15);
+});
+
+test('int8x16 bitselect', function() {
+  var m = SIMD.int8x16(0xaaaaaaaa, 0xbbbbbbbb, 0xcccccccc, 0xdddddddd, 0xeeeeeeee, 0xffffffff, 0x00000000, 0x11111111,
+                       0x22222222, 0x33333333, 0x44444444, 0x55555555, 0x66666666, 0x77777777, 0x88888888, 0x99999999);
+  var t = SIMD.int8x16(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+  var f = SIMD.int8x16(17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+  var s = SIMD.int8x16.bitselect(m, t, f);
+  equal(17, s.s0);
+  equal(2, s.s1);
+  equal(19, s.s2);
+  equal(4, s.s3);
+  equal(21, s.s4);
+  equal(6, s.s5);
+  equal(23, s.s6);
+  equal(8, s.s7);
+  equal(25, s.s8);
+  equal(10, s.s9);
+  equal(27, s.s10);
+  equal(12, s.s11);
+  equal(29, s.s12);
+  equal(14, s.s13);
+  equal(31, s.s14);
+  equal(48, s.s15);
 });
 
 test('int8x16 fromFloat32x4Bits constructor', function() {

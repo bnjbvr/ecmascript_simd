@@ -1,29 +1,30 @@
 "use strict"
 
-if (typeof SIMD === "undefined") {
-  load ('../ecmascript_simd.js');
-}
-if (typeof Float32x4Array === "undefined") {
-  load ('../float32x4array.js');
-}
-if (typeof Int32x4Array === "undefined") {
-  load ('../int32x4array.js');
-}
-
+load ('../ecmascript_simd.js');
 load ('base.js');
 
 // load individual benchmarks
+
 load ('kernel-template.js');
 load ('averageFloat32x4.js');
+load ('averageFloat32x4Load.js');
+load ('averageFloat32x4LoadFromInt8Array.js');
+load ('averageFloat32x4LoadX.js');
+load ('averageFloat32x4LoadXY.js');
+load ('averageFloat32x4LoadXYZ.js');
 load ('averageFloat64x2.js');
+load ('averageFloat64x2Load.js');
 load ('mandelbrot.js');
 load ('matrix-multiplication.js');
+load ('matrix-multiplication-load.js');
 load ('transform.js');
 load ('shiftrows.js');
 load ('aobench.js');
 load ('transpose4x4.js');
 load ('inverse4x4.js');
 load ('sinx4.js');
+load ('memset.js');
+load ('memcpy.js');
 
 function printResult (str) {
   print (str);
