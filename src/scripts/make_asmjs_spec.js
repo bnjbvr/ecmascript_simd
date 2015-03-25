@@ -15,7 +15,7 @@ fs.readFile('../ecmascript_simd.js', function cb(err, data) {
 
     for (var key in comments) {
 
-        // Ignore signMask
+        // Ignore signMask et al.
         if (key.indexOf("Object\.") !== -1)
             continue;
 
@@ -29,14 +29,28 @@ fs.readFile('../ecmascript_simd.js', function cb(err, data) {
         if (op.indexOf('.') === -1)
             continue;
 
-        var code = "try {" +
-            "asmCompile('glob', 'ffi', 'heap', \"'use asm'; var i4=glob.SIMD.int32x4; var f4=glob.SIMD.float32x4; var op=${op}; return {};\");" +
-        "} catch(e) {" +
-            "print('${key} isnt supported in asm.js');"  +
-        "}\n";
+        var code = "var caught = false; try {" +
+            "asmCompile('glob', 'ffi', 'heap', \"'use asm'; " +
+            "var i4=glob.SIMD.int32x4; " +
+            "var f4=glob.SIMD.float32x4; " +
+            "var op=${op}; return {};\");" +
+        "} catch(e) { caught = true; }" +
+        "if (!caught) console.log('${key}: ${args} -> ${retval}');" +
+        "\n";
+
+        var notes = comments[key];
+
+        var args = notes.param.map(function(pair) {
+            // pair == (key, comment)
+            return pair[0]
+                .replace('{','').replace('}','');
+        });
+        var retval = (notes.return && notes.return.substring(1, notes.return.indexOf('}'))) || 'void';
 
         code = code.replace("${op}", op)
-                   .replace("${key}", key);
+                   .replace("${key}", key)
+                   .replace("${args}", args)
+                   .replace("${retval}", retval);
 
         script += code + '\n';
     }
